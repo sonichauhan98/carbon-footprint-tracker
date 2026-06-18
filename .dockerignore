@@ -1,0 +1,32 @@
+# =============================================================================
+# Docker build context exclusions — smaller images, faster builds, no secrets.
+# =============================================================================
+
+# Python virtual env & caches
+backend/.venv/
+backend/**/__pycache__/
+backend/.pytest_cache/
+**/*.py[cod]
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Node dependencies & build output (rebuilt inside Docker)
+frontend/node_modules/
+frontend/dist/
+
+# Git & IDE
+.git/
+.gitignore
+.vscode/
+.idea/
+**/.DS_Store
+Thumbs.db
+
+# Local env files (never bake secrets into images)
+**/.env
+**/.env.*
+!**/.env.example
+
+# Docs & misc
+**/*.md
+agent-transcripts/

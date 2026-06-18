@@ -1,0 +1,117 @@
+# =============================================================================
+# Carbon Footprint Tracker — Production .gitignore
+# Keeps the repo light: no caches, dependencies, secrets, or build artifacts.
+# =============================================================================
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+.pytype/
+cython_debug/
+
+# Virtual environments (any location)
+.venv/
+venv/
+ENV/
+env/
+.env/
+
+# --- Node.js / Frontend ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+
+# Vite / build output
+frontend/dist/
+frontend/dist-ssr/
+*.local
+
+# --- Environment & secrets (NEVER commit) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials.json
+*.credentials
+
+# --- IDE & editors ---
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# --- OS files ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# --- Logs & temp ---
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+
+# --- Testing / coverage ---
+coverage/
+.nyc_output/
+*.lcov
+
+# --- Database (local dev) ---
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Docker (optional local overrides) ---
+docker-compose.override.yml
