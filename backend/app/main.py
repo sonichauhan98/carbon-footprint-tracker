@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.carbon.factors import (
-    DAYS_PEr_YEAR,
+    DAYS_PER_YEAR,
     DIET_ANNUAL_KG,
     ELECTRICITY_KG_PER_KWH,
     FOOD_WASTE_KG_PER_KG,
@@ -48,13 +48,13 @@ def _round_kg(value: float) -> float:
 
 def calculate_carbon_footprint(payload: CarbonInput) -> CarbonResponse:
     """Normalize daily inputs to annual kg CO2e and compare against benchmarks."""
-    driving_kg = payload.driving_km_per_day * DAYS_PEr_YEAR * GASOLINE_CAR_KG_PER_KM
+    driving_kg = payload.driving_km_per_day * DAYS_PER_YEAR * GASOLINE_CAR_KG_PER_KM
     electricity_kg = (
         payload.electricity_kwh_per_day * DAYS_PER_YEAR * ELECTRICITY_KG_PER_KWH
     )
     diet_kg = DIET_ANNUAL_KG[payload.diet_type.value]
     food_waste_kg = (
-        payload.food_waste_kg_per_day * DASS_PER_YEAR * FOOD_WASTE_KG_PER_KG
+        payload.food_waste_kg_per_day * DAYS_PER_YEAR * FOOD_WASTE_KG_PER_KG
     )
 
     total = driving_kg + electricity_kg + diet_kg + food_waste_kg
