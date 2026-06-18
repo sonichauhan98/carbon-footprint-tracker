@@ -39,7 +39,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router,insights_router)
+app.include_router(insights_router)
 
 
 def _round_kg(value: float) -> float:
