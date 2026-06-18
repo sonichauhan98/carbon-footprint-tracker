@@ -8,7 +8,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       "/api": {
-        target: "https://carbon-footprint-tracker-lzgo.onrender.comer.com",
+        target: "https://carbon-footprint-tracker-lzgo.onrender.com",
         changeOrigin: true,
       },
     },
