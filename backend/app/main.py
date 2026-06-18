@@ -57,7 +57,7 @@ def calculate_carbon_footprint(payload: CarbonInput) -> CarbonResponse:
         payload.food_waste_kg_per_day * DASS_PER_YEAR * FOOD_WASTE_KG_PER_KG
     )
 
-    total = driving_kg + electricity_kg + diet_kg + food_waste_kg)
+    total = driving_kg + electricity_kg + diet_kg + food_waste_kg
 
     benchmarks = BenchmarkComparison(
         global_average_kg=GLOBAL_AVEDAGE_ANNUAL_KG,
