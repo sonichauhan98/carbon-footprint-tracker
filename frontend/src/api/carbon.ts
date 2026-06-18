@@ -75,7 +75,7 @@ export async function calculateCarbonFootprint(
   form: TrackerFormValues,
   signal?: AbortSignal,
 ): Promise<CarbonApiResponse> {
-  const response = await fetch(`${API_BASE}/api/calculate`, {
+  const response = await fetch(`${API_BASE}/calculate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(toApiPayload(form)),
