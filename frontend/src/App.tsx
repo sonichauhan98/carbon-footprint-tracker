@@ -134,7 +134,7 @@ export default function App() {
               <p className="mt-2 text-sm">
                 Make sure the backend is running at{" "}
                 <code className="rounded bg-red-100 px-1 py-0.5 text-red-950">
-                  https://carbon-footprint-tracker-lzgo.onrender.com
+                  https://carbon-footprint-tracker-lzgo.onrender.com/api/calculate
                 </code>
                 .
               </p>
