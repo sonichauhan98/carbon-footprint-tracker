@@ -1,5 +1,6 @@
 """FastAPI application for the Carbon Footprint Awareness Platform."""
 
+import logging
 import os
 from pathlib import Path
 
@@ -24,13 +25,15 @@ from app.schemas import (
     CategoryBreakdown,
 )
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 app = FastAPI(
     title="Carbon Footprint Awareness Platform",
     description="Calculate personal carbon emissions from daily lifestyle inputs.",
     version="1.0.0",
 )
 
-# Enabled CORS globally for deployment so the frontend on Render can interact with it
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -47,7 +50,6 @@ def _round_kg(value: float) -> float:
 
 
 def calculate_carbon_footprint(payload: CarbonInput) -> CarbonResponse:
-    """Normalize daily inputs to annual kg CO2e and compare against benchmarks."""
     driving_kg = payload.driving_km_per_day * DAYS_PER_YEAR * GASOLINE_CAR_KG_PER_KM
     electricity_kg = (
         payload.electricity_kwh_per_day * DAYS_PER_YEAR * ELECTRICITY_KG_PER_KWH
@@ -56,7 +58,6 @@ def calculate_carbon_footprint(payload: CarbonInput) -> CarbonResponse:
     food_waste_kg = (
         payload.food_waste_kg_per_day * DAYS_PER_YEAR * FOOD_WASTE_KG_PER_KG
     )
-
     total = driving_kg + electricity_kg + diet_kg + food_waste_kg
 
     benchmarks = BenchmarkComparison(
@@ -88,3 +89,32 @@ def calculate_carbon_footprint(payload: CarbonInput) -> CarbonResponse:
 def health_check() -> dict[str, str]:
     return {"status": "ok"}
 
+
+@app.post("/api/calculate", response_model=CarbonResponse)
+def calculate_emissions(payload: CarbonInput) -> CarbonResponse:
+    try:
+        return calculate_carbon_footprint(payload)
+    except (KeyError, TypeError, ValueError) as exc:
+        raise HTTPException(status_code=400, detail="Invalid calculation input.") from exc
+
+
+def _mount_frontend_static(app: FastAPI) -> None:
+    static_dir = Path(os.getenv("STATIC_DIR", Path(__file__).resolve().parent.parent / "static"))
+    index_file = static_dir / "index.html"
+
+    logger.info(f"STATIC_DIR path: {static_dir}")
+    logger.info(f"index.html exists: {index_file.is_file()}")
+    logger.info(f"static dir exists: {static_dir.is_dir()}")
+
+    if not index_file.is_file():
+        logger.warning(f"Frontend static files NOT found at {static_dir}")
+        return
+
+    app.mount(
+        "/",
+        StaticFiles(directory=str(static_dir), html=True),
+        name="frontend",
+    )
+
+
+_mount_frontend_static(app)
