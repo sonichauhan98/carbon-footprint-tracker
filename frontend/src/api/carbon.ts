@@ -1,6 +1,6 @@
 import type { ApiDietType, CarbonApiRequest, CarbonApiResponse, TrackerFormValues } from "../types/carbon";
 
-const API_BASE = "https://carbon-footprint-tracker-lzgo.onrender.com";
+const API_BASE = "";
 
 const WEEKS_PER_YEAR = 52;
 const DAYS_PER_YEAR = 365;
