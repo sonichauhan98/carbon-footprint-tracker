@@ -60,7 +60,7 @@ def calculate_carbon_footprint(payload: CarbonInput) -> CarbonResponse:
     total = driving_kg + electricity_kg + diet_kg + food_waste_kg
 
     benchmarks = BenchmarkComparison(
-        global_average_kg=GLOBAL_AVEDAGE_ANNUAL_KG,
+        global_average_kg=GLOBAL_AVERAGE_ANNUAL_KG,
         paris_target_kg=PARIS_TARGET_ANNUAL_KG,
         difference_from_global_kg=_round_kg(total - GLOBAL_AVERAGE_ANNUAL_KG),
         difference_from_paris_kg=_round_kg(total - PARIS_TARGET_ANNUAL_KG),
