@@ -2,7 +2,7 @@
 A full-stack web application that allows users to calculate, track, and analyze their daily carbon footprint across commuting 🚗, energy usage ⚡, and dietary habits 🍔. The app provides a responsive frontend user interface alongside an automated analytics backend engine that generates personalized environmental insights 📈.
 
 🛠️ TECH STACK AND ARCHITECTURE
-The application is split into two cleanly separated services:
+The application is split into two cleanly separated services: 
 
 Frontend (React/Vite) 💻 ---> HTTP POST ✉️ ---> Backend (FastAPI/Uvicorn) 🐍
 Port: 5173 (Local)       <--- JSON Response 📄 <--- Port: 10000 (Render)
