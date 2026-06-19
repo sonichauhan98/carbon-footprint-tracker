@@ -21,22 +21,40 @@ Port: 5173 (Local)       <--- JSON Response 📄 <--- Port: 10000 (Render)
 📊 Data Visualization: Interactive breakdown charts mapping historical trends and resource consumption metrics side-by-side.
 
 📁 PROJECT STRUCTURE
+
 Carbon_Footprint_Tracker/
+
 ├── backend/                  # 🐍 Python FastAPI Source
+
 │   └── app/
+
 │       ├── main.py           # 🚀 Application Entrypoint and API Routers
+
 │       ├── schemas.py        # ✅ Pydantic Input/Output Validations
+
 │       └── carbon/
+
 │           └── factors.py    # 🧮 Carbon Conversion Math Constants
+
 ├── frontend/                 # 💻 React TypeScript Source
+
 │   ├── src/
+
+
 │   │   ├── api/
+
 │   │   │   ├── carbon.ts     # 🔗 Calculations API Client
+
 │   │   │   └── insights.ts   # 🔗 Insights API Client
+
 │   │   ├── App.tsx           # 🎛️ Main UI Dashboard Core
+
 │   │   └── components/       # 🧱 Forms, Charts, and Layout Panels
+
 │   ├── package.json
+
 │   └── vite.config.ts
+
 └── README.md                 # 📖 Project Documentation
 
 🔌 API ENDPOINTS
