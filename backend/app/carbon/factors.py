@@ -4,21 +4,20 @@ All values are expressed in kilograms of CO2 equivalent (kg CO2e) unless noted.
 Factors are drawn from authoritative government and peer-reviewed sources.
 """
 
+from enum import Enum
 from typing import Final, TypedDict
+
+
+class DietType(str, Enum):
+    HEAVY_MEAT = "heavy_meat"
+    VEGETARIAN = "vegetarian"
+    VEGAN = "vegan"
 
 
 class DietFactors(TypedDict):
     heavy_meat: float
     vegetarian: float
     vegan: float
-
-
-class EmissionFactors(TypedDict):
-    transport: dict[str, float]
-    energy: dict[str, float]
-    diet: DietFactors
-    waste: dict[str, float]
-    benchmarks: dict[str, float]
 
 
 # ---------------------------------------------------------------------------
@@ -49,9 +48,9 @@ ELECTRICITY_KG_PER_KWH: Final[float] = 0.3865
 # Vegan: 2.89 kg CO2e/day × 365 ≈ 1,055 kg CO2e/year.
 # Source: https://doi.org/10.1007/s10584-014-1169-1
 DIET_ANNUAL_KG: Final[DietFactors] = {
-    "heavy_meat": 2624.0,
-    "vegetarian": 1391.0,
-    "vegan": 1055.0,
+    DietType.HEAVY_MEAT.value: 2624.0,
+    DietType.VEGETARIAN.value: 1391.0,
+    DietType.VEGAN.value: 1055.0,
 }
 
 # ---------------------------------------------------------------------------
@@ -76,20 +75,3 @@ GLOBAL_AVERAGE_ANNUAL_KG: Final[float] = 4700.0
 PARIS_TARGET_ANNUAL_KG: Final[float] = 2000.0
 
 DAYS_PER_YEAR: Final[int] = 365
-
-EMISSION_FACTORS: Final[EmissionFactors] = {
-    "transport": {
-        "gasoline_car_kg_per_km": GASOLINE_CAR_KG_PER_KM,
-    },
-    "energy": {
-        "electricity_kg_per_kwh": ELECTRICITY_KG_PER_KWH,
-    },
-    "diet": DIET_ANNUAL_KG,
-    "waste": {
-        "food_waste_kg_per_kg": FOOD_WASTE_KG_PER_KG,
-    },
-    "benchmarks": {
-        "global_average_annual_kg": GLOBAL_AVERAGE_ANNUAL_KG,
-        "paris_target_annual_kg": PARIS_TARGET_ANNUAL_KG,
-    },
-}
