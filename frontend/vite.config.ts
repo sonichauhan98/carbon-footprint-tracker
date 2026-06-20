@@ -6,24 +6,23 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     target: "esnext",
-    minify: "esbuild", // Default engine uses built-in esbuild (Zero install needed, extremely fast)
-    cssCodeSplit: true, // Splits your Tailwind CSS per component to reduce initial load time
+    minify: "esbuild",
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
             if (id.includes("recharts") || id.includes("d3")) {
-              return "vendor-charts"; // Separates heavy charting code
+              return "vendor-charts";
             }
-            if (id.includes("react") || id.includes("react-dom")) {
-              return "vendor-core"; // Bundles core React library together
+            if (id.includes("react-dom") || id.includes("react")) {
+              return "vendor-core";
             }
-            return "vendor-utils"; // Packs remaining smaller utilities
           }
         },
       },
     },
-    chunkSizeWarningLimit: 500,
+    chunkSizeWarningLimit: 600,
   },
   server: {
     port: 5173,
